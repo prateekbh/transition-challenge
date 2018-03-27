@@ -1,0 +1,37 @@
+.stockcard{
+  margin: 16px 0;
+}
+
+.title {
+  margin: 8px;
+  max-width: 100%;
+  max-height: 32px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.stock_details{
+  padding: 8px;
+}
+
+.stock_details_header, .stock_details_values{
+  display: flex;
+  align-items: center;
+}
+
+.stock_details_cost{
+  flex: 2;
+}
+
+.stock_details_date, .stock_details_sym {
+  flex: 1;
+}
+
+.stock_details_values .stock_details_date {
+  color: #ccc;
+}
+
+.stock_details_sym {
+  text-align: center;
+}
