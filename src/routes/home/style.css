@@ -6,18 +6,14 @@
 
 .card{
   transition-property: transform, opacity;
-  transition-duration: 400ms;
+  transition-duration: 500ms;
   margin: 16px 0;
   will-change: transform;
 }
 
-.leave  .card.noleave {
-  transition-property: transform;
-  transition-timing-function: cubic-bezier(0.6, -0.3, 0.745, 0.045);
-  opacity: 1;
-  transform: scale(1);
-  z-index: 11;
-  position: relative;
+.card.noshow {
+  transition-property: none;
+  opacity: 0;
 }
 
 .cardHeader {
@@ -27,6 +23,7 @@
 .cardBody {
 	padding: 16px
 }
+
 
 .leave .card{
   opacity: 0;

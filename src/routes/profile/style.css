@@ -1,5 +1,57 @@
 .profile {
-	padding: 20px;
+	padding: 140px 20px 20px 20px;
 	min-height: 100%;
-	width: 100%;
+  width: 100%;
+}
+
+.card {
+  z-index: 11;
+  position: fixed;
+  top: 50px;
+  width: calc(100% - 40px);
+}
+
+.info {
+  color: #999;
+  display: flex;
+}
+
+.info .startdate {
+  flex: 3
+}
+
+.info .stats{
+  display: flex;
+  color: #1DE9B6;
+}
+
+.infolist {
+  margin-top: 16px;
+}
+
+.infodetails {
+  opacity: 0;
+  animation-delay: 100ms;
+  animation-name: drop;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+}
+
+.customlistitem {
+  padding: 0;
+  opacity: 0;
+  animation-name: drop;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+}
+
+@keyframes drop {
+  from {
+    opacity: 0;
+    transform: translateY(-10px)
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0)
+  }
 }

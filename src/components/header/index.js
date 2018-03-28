@@ -9,12 +9,12 @@ export default class Header extends Component {
 	constructor() {
 		super();
 		this.state = {
-			mode: 'home'
+			route: 'home'
 		};
 	}
-	showDetails(mode) {
+	navigateRequest(route) {
 		this.setState({
-			mode
+			route
 		});
 	}
 	render() {
@@ -33,8 +33,7 @@ export default class Header extends Component {
 						</Toolbar.Section>
 					</Toolbar.Row>
 				</Toolbar>
-				<div className={`${style.detailsheader} ${style[this.state.mode]}`}>
-				</div>
+				<div className={`${style.detailsheader} ${style[this.state.route]}`} />
 			</div>
 		);
 	}

@@ -6,7 +6,7 @@ import style from './style';
 export default class StockCard extends Component {
 	render(props) {
 		return (
-			<Card className={style.stockcard} {...props}>
+			<Card className={`${style.stockcard} ${props.class} ${props.className}`} {...props}>
 				<div>
 					<h2 class={`${style.title} mdc-typography--title`}>{props.stock.company_name}</h2>
 				</div>

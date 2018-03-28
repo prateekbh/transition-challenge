@@ -51,3 +51,18 @@ body.lock {
 	background-color: #333;
 	color: #fff;
 }
+
+.animation-ghost {
+  pointer-events: none;
+}
+
+.animation-ghost .mdc-card {
+  position: fixed;
+  z-index: 13;
+  width: calc(100% - 40px);
+  box-sizing: border-box;
+  left: 20px;
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.6, -0.1, 0.745, 0.045);
+  transition-duration: 500ms;
+}
