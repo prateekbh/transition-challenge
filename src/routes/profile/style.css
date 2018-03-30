@@ -5,6 +5,11 @@
 }
 
 .card {
+  opacity: 0;
+  animation-name: fadein;
+  animation-duration: 0ms;
+  animation-delay: 499ms;
+  animation-fill-mode: forwards;
   z-index: 11;
   position: fixed;
   top: 50px;
@@ -31,7 +36,7 @@
 
 .infodetails {
   opacity: 0;
-  animation-delay: 100ms;
+  animation-delay: 700ms;
   animation-name: drop;
   animation-duration: 300ms;
   animation-fill-mode: forwards;
@@ -45,6 +50,36 @@
   animation-fill-mode: forwards;
 }
 
+.fablike, .fabwallet {
+  position: fixed;
+  bottom: 20px;
+  left: 10%;
+  background-color: #D32F2F;
+  opacity: 0;
+  animation-delay: 100ms;
+  animation-name: rise;
+  animation-duration: 300ms;
+  animation-delay: 800ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.fabwallet {
+  background-color: #03A9F4;
+  left: auto;
+  right: 10%;
+  animation-delay: 900ms;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes drop {
   from {
     opacity: 0;
@@ -54,4 +89,28 @@
     opacity: 1;
     transform: translateY(0)
   }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+:global(.firstview) .card {
+  animation-delay: 0ms;
+  animation-duration: 500ms;
+}
+
+:global(.firstview) .infodetails {
+  animation-delay: 0ms;
+}
+
+:global(.firstview) .fablike, :global(.firstview) .fabwallet {
+  animation-delay: 0ms;
 }

@@ -54,15 +54,32 @@ body.lock {
 
 .animation-ghost {
   pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 14;
 }
 
 .animation-ghost .mdc-card {
-  position: fixed;
-  z-index: 13;
+  position: absolute;
+  z-index: 15;
   width: calc(100% - 40px);
   box-sizing: border-box;
   left: 20px;
   transition-property: transform;
-  transition-timing-function: cubic-bezier(0.6, -0.1, 0.745, 0.045);
   transition-duration: 500ms;
+  transition-timing-function: cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+
+.pageTransition-leave, .pageTransition-enter-active{
+  position: fixed;
+  top: 56px;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+.pageTransition-leave {
+  z-index: 1;
 }
