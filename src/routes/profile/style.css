@@ -6,10 +6,6 @@
 
 .card {
   opacity: 0;
-  animation-name: fadein;
-  animation-duration: 0ms;
-  animation-delay: 499ms;
-  animation-fill-mode: forwards;
   z-index: 11;
   position: fixed;
   top: 50px;
@@ -36,10 +32,6 @@
 
 .infodetails {
   opacity: 0;
-  animation-delay: 700ms;
-  animation-name: drop;
-  animation-duration: 300ms;
-  animation-fill-mode: forwards;
 }
 
 .customlistitem {
@@ -56,19 +48,55 @@
   left: 10%;
   background-color: #D32F2F;
   opacity: 0;
-  animation-delay: 100ms;
-  animation-name: rise;
-  animation-duration: 300ms;
-  animation-delay: 800ms;
-  animation-fill-mode: forwards;
-  animation-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 .fabwallet {
   background-color: #03A9F4;
   left: auto;
   right: 10%;
-  animation-delay: 900ms;
+}
+
+/**
+ * Appear animation
+ */
+.visible .card {
+  animation-name: fadein;
+  animation-duration: 50ms;
+  animation-fill-mode: forwards;
+}
+
+.visible .fablike, .visible .fabwallet{
+  animation-name: rise;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.visible .infodetails {
+  animation-name: drop;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+}
+
+/**
+ * Disappear animation
+ */
+
+.leaving .card {
+  opacity: 0;
+}
+
+.leaving .fablike, .leaving .fabwallet{
+  animation-name: drown;
+  animation-duration: 100ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
+.leaving .infodetails {
+  animation-name: rise;
+  animation-duration: 300ms;
+  animation-fill-mode: backwards;
 }
 
 @keyframes fadein {
@@ -102,15 +130,13 @@
   }
 }
 
-:global(.firstview) .card {
-  animation-delay: 0ms;
-  animation-duration: 500ms;
-}
-
-:global(.firstview) .infodetails {
-  animation-delay: 0ms;
-}
-
-:global(.firstview) .fablike, :global(.firstview) .fabwallet {
-  animation-delay: 0ms;
+@keyframes drown {
+  from {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(50px);
+  }
 }

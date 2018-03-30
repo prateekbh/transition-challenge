@@ -1,6 +1,6 @@
 import { h, Component } from 'preact';
 import { Router } from 'preact-router';
-import PreactCSSTransitionGroup from 'preact-animate';
+import PreactAnimate from 'preact-animate';
 import Header from './header';
 import Home from '../routes/home';
 import Profile from '../routes/profile';
@@ -75,17 +75,24 @@ export default class App extends Component {
 }
 
 class TransitionRouter extends Router {
+
+	callWillLeave = (child) => {
+		child._component._component.componentWillLeave &&
+						child._component._component.componentWillLeave();
+	}
+
 	render(props, state) {
 		return (
-			<PreactCSSTransitionGroup
+			<PreactAnimate
 				component="div"
 				transitionName="pageTransition"
 				transitionEnter={false}
 				transitionLeave
-        transitionLeaveTimeout={500}
+				transitionLeaveTimeout={500}
+				onBeforeLeave={this.callWillLeave}
 			>
 				{super.render(props, state)}
-			</PreactCSSTransitionGroup>
+			</PreactAnimate>
 		);
 	}
 }

@@ -11,15 +11,33 @@ import style from './style';
 
 export default class Profile extends Component {
 
-	componentWillUnmount() {
-		//this.props.animateToHome(this.stockcard.base.cloneNode(true));
+	componentDidMount() {
+		this.props.getRouter()
+			.runAnimation(this.stockcard.base.getBoundingClientRect())
+			.then(this.completeHandoff)
+			.catch(this.completeHandoff);
+	}
+
+	completeHandoff = () => {
+		window.scrollTo(0,0);
+		this.setState({
+			visibilityState: 'visible'
+		});
+	}
+
+	componentWillLeave() {
+		const ghostCard = this.stockcard.base.cloneNode(true);
+		const clientRects = this.stockcard.base.getBoundingClientRect();
+		this.props.getRouter().addSharedElement(ghostCard, clientRects);
+		this.setState({
+			visibilityState: 'leaving'
+		});
 	}
 
 	render(props) {
-    const cardData = data[props.cardindex];
-    const animationDelayOffset = props.getRouter().isFirstPage()?0:700;
+		const cardData = data[props.cardindex];
 		return (
-			<div class={`${style.profile} page ${props.getRouter().isFirstPage()?'firstview':''}`}>
+			<div class={`${style.profile} page ${style[this.state.visibilityState]}`}>
 				<StockCard ref={card => this.stockcard = card} className={style.card} stock={cardData} />
 				<div className={style.infodetails}>
 					<div className={`${style.info} mdc-typography--subheading1`}>
@@ -28,23 +46,23 @@ export default class Profile extends Component {
 					</div>
 					<div className="mdc-typography--caption">Equity - Mid Cap</div>
 				</div>
-				<div>
+				{this.state.visibilityState === 'visible' && <div>
 					<List className={style.infolist}>
-						<List.Item className={style.customlistitem} style={`animation-delay: ${animationDelayOffset + 100}ms`}>
+						<List.Item className={style.customlistitem} style={`animation-delay: 100ms`}>
 							<List.TextContainer>
 								<List.PrimaryText>March Stats</List.PrimaryText>
 								<List.SecondaryText>Gain 15%</List.SecondaryText>
 							</List.TextContainer>
 							<List.ItemMeta>navigate_next</List.ItemMeta>
 						</List.Item>
-						<List.Item className={style.customlistitem} style={`animation-delay: ${animationDelayOffset + 200}ms`}>
+						<List.Item className={style.customlistitem} style={`animation-delay: 200ms`}>
 							<List.TextContainer>
 								<List.PrimaryText>Feb Stats</List.PrimaryText>
 								<List.SecondaryText>Loss 1%</List.SecondaryText>
 							</List.TextContainer>
 							<List.ItemMeta>navigate_next</List.ItemMeta>
 						</List.Item>
-						<List.Item className={style.customlistitem} style={`animation-delay: ${animationDelayOffset + 300}ms`}>
+						<List.Item className={style.customlistitem} style={`animation-delay: 300ms`}>
 							<List.TextContainer>
 								<List.PrimaryText>Jan Stats</List.PrimaryText>
 								<List.SecondaryText>Gain 5%</List.SecondaryText>
@@ -52,7 +70,7 @@ export default class Profile extends Component {
 							<List.ItemMeta>navigate_next</List.ItemMeta>
 						</List.Item>
 					</List>
-				</div>
+				</div>}
 				<Fab className={style.fablike}>
 					<Fab.Icon>favorite_border</Fab.Icon>
 				</Fab>

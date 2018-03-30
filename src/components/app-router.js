@@ -4,9 +4,11 @@ import { setTimeout } from 'timers';
 export default class AppRouter {
 	constructor(ghostContainer, header) {
 		this.ghostContainer_ = ghostContainer;
+		this.sharedElement_;
+		this.sharedElementPosition_;
 		this.header_ = header;
 		this.prevUrl = null;
-		this.currentUrl = '';
+		this.currentUrl = window!==undefined?window.location.href:'';
 	}
 
 	setRoute(url) {
@@ -14,42 +16,57 @@ export default class AppRouter {
 		this.currentUrl = url;
 	}
 
-	isFirstPage() {
-		return this.prevUrl === null;
+	getPrevUrl() {
+		return this.prevUrl;
 	}
 
 	/**
 	 * @private
 	 */
 	clearGhostContainer_() {
+		this.sharedElement_ = null;
+		this.sharedElementPosition_ = null;
 		this.ghostContainer_.innerHTML = '';
 	}
 
 	/**
 	 * Animates to details page.
 	 * @param {Node} ghostCard
-	 * @param {JsonObject} cardBoundingRect
-	 * @param {number} cardIndex
+	 * @param {DomRect} cardBoundingRect
 	 */
-	animateToDetails(ghostCard, cardBoundingRect, cardIndex) {
-		this.header_.navigateRequest('details');
-		const travelDistance = cardBoundingRect.top - 66;
-		ghostCard.className = 'mdc-card';
-		ghostCard.removeAttribute('style');
-		ghostCard.style.top = `${cardBoundingRect.top - 16}px`;
-		ghostCard.style.transitionDuration = '500ms';
-		ghostCard.addEventListener('transitionend', () => {
-			setTimeout(() => {
-				ghostCard.remove();
-				this.clearGhostContainer_();
-			}, 300);
+	addSharedElement(element, cardBoundingRect) {
+		this.sharedElement_ = element;
+		this.sharedElementPosition_ = cardBoundingRect;
+		element.className = 'mdc-card';
+		element.removeAttribute('style');
+		element.style.top = `${cardBoundingRect.top}px`;
+		element.style.left = `${cardBoundingRect.left}px`;
+		element.style.transitionDuration = '500ms';
+		this.ghostContainer_.appendChild(this.sharedElement_);
+	}
 
-		});
-		this.ghostContainer_.appendChild(ghostCard);
-		requestAnimationFrame(() => {
-			window.scrollTo(0,0);
-			ghostCard.style.transform = `translateY(-${travelDistance}px)`;
-			route(`/details/${cardIndex}`);
+	/**
+	 * Animates the shared element to destination coordinates
+	 * @param {*} position
+	 */
+	runAnimation({ top, left }) {
+		return new Promise((resolve, reject) => {
+			try {
+				const travelDistance = top - this.sharedElementPosition_.top;
+				this.ghostContainer_.addEventListener('transitionend', () => {
+					resolve();
+					setTimeout(() => {
+						this.clearGhostContainer_();
+					}, 300);
+				}, { once: true });
+				requestAnimationFrame(() => {
+					this.sharedElement_.style.transform = `translateY(${travelDistance}px)`;
+				});
+			}
+			catch (e) {
+				this.clearGhostContainer_();
+				reject();
+			}
 		});
 	}
 }
