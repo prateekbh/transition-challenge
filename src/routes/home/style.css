@@ -1,7 +1,11 @@
 .home {
-	padding: 20px;
+	padding: 0;
 	min-height: 100%;
 	width: 100%;
+}
+
+.content {
+  padding: 20px;
 }
 
 .card{
@@ -29,10 +33,6 @@
   z-index: 12;
 }
 
-:global(.pageTransition-leave) .card.noshow {
-  visibility: hidden;
-}
-
 .cardHeader {
 	padding: 16px;
 }
@@ -41,11 +41,37 @@
 	padding: 16px
 }
 
+.toolbar{
+  background: #FAFAFA;
+  color: #000;
+  transition-property: opacity;
+  transition-duration: 300ms;
+}
+
+.toolbar.details {
+  opacity: 0;
+}
+
+.toolbar.profile{
+  transform: translateY(-100%);
+}
+
+.sideicon {
+  padding: 0 8px;
+}
+
+:global(.pageTransition-leave) .card.noshow {
+  visibility: hidden;
+}
 
 :global(.pageTransition-leave) .card{
   animation-name: disappear;
   animation-duration: 300ms;
   animation-delay: 0ms!important;
+}
+
+:global(.pageTransition-leave) .toolbar{
+  opacity: 0;
 }
 
 @keyframes appear {

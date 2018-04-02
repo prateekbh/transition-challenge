@@ -3,6 +3,7 @@ import { Router } from 'preact-router';
 import PreactAnimate from 'preact-animate';
 import Header from './header';
 import Home from '../routes/home';
+import Details from '../routes/details';
 import Profile from '../routes/profile';
 import AppRouter from './app-router';
 
@@ -10,7 +11,6 @@ export default class App extends Component {
 	constructor(){
 		super();
 		this.appRouter_;
-		this.onNavigateRequest = this.onNavigateRequest.bind(this);
 		this.animateToDetails = this.animateToDetails.bind(this);
 		this.animateToHome = this.animateToHome.bind(this);
 		this.removeGhost = this.removeGhost.bind(this);
@@ -22,17 +22,7 @@ export default class App extends Component {
 	 */
 	handleRoute = e => {
 		this.appRouter_ && this.appRouter_.setRoute(e.url);
-		this.onNavigateRequest(e.url);
 	};
-
-	onNavigateRequest(mode) {
-		if (mode === '/') {
-			this.header.navigateRequest('home');
-		}
-		else if (mode.startsWith('/details')) {
-			this.header.navigateRequest('details');
-		}
-	}
 
 	animateToDetails(card) {
 		document.body.classList.add('lock');
@@ -66,7 +56,8 @@ export default class App extends Component {
 				<Header ref={header => this.header= header} />
 				<TransitionRouter onChange={this.handleRoute} >
 					<Home key="1" path="/" getRouter={() => this.appRouter_} />
-					<Profile key="2" getRouter={() => this.appRouter_} path="/details/:cardindex" />
+					<Details key="2" getRouter={() => this.appRouter_} path="/details/:cardindex" />
+					<Profile key="3" getRouter={() => this.appRouter_} path="/profile/:id" />
 				</TransitionRouter>
 				<div ref={animGhost => this.animGhost = animGhost} className="animation-ghost" />
 			</div>

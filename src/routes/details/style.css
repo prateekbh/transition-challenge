@@ -1,0 +1,167 @@
+.details {
+	padding: 180px 20px 20px 20px;
+	min-height: 100%;
+  width: 100%;
+}
+
+.card {
+  opacity: 0;
+  z-index: 11;
+  position: fixed;
+  top: 50px;
+  width: calc(100% - 40px);
+}
+
+.info {
+  color: #999;
+  display: flex;
+}
+
+.info .startdate {
+  flex: 3
+}
+
+.info .stats{
+  display: flex;
+  color: #1DE9B6;
+}
+
+.infolist {
+  margin-top: 16px;
+}
+
+.infodetails {
+  opacity: 0;
+}
+
+.customlistitem {
+  padding: 0;
+  opacity: 0;
+  animation-name: drop;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+}
+
+.pic {
+  background-size: cover;
+  border-radius: 50%;
+  margin-right: 16px;
+  width: 32px;
+  height: 32px;
+}
+
+.fablike, .fabwallet {
+  position: fixed;
+  bottom: 20px;
+  left: 10%;
+  background-color: #D32F2F;
+  opacity: 0;
+}
+
+.fabwallet {
+  background-color: #03A9F4;
+  left: auto;
+  right: 10%;
+}
+
+.detailsheader {
+  background-color: #03A9F4;
+  height: 100px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  transition-property: transform;
+  transition-duration: 500ms;
+  transform: translateY(-100%);
+}
+
+.visible .detailsheader {
+  transform: translateY(0%);
+}
+
+/**
+ * Appear animation
+ */
+.visible .card {
+  animation-name: fadein;
+  animation-duration: 50ms;
+  animation-fill-mode: forwards;
+}
+
+.visible .fablike, .visible .fabwallet{
+  animation-name: rise;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.visible .infodetails {
+  animation-name: drop;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+}
+
+/**
+ * Disappear animation
+ */
+
+.leaving .card {
+  opacity: 0;
+}
+
+.leaving .fablike, .leaving .fabwallet{
+  animation-name: drown;
+  animation-duration: 100ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
+.leaving .infodetails {
+  animation-name: rise;
+  animation-duration: 300ms;
+  animation-fill-mode: backwards;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes drop {
+  from {
+    opacity: 0;
+    transform: translateY(-10px)
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0)
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes drown {
+  from {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+}

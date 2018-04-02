@@ -1,0 +1,36 @@
+[{
+  "id": 1,
+  "first_name": "Oates",
+  "last_name": "Springtorp",
+  "email": "ospringtorp0@lulu.com",
+  "gender": "Male",
+  "pic": "http://lorempixel.com/output/people-q-c-640-640-1.jpg"
+}, {
+  "id": 2,
+  "first_name": "Tatum",
+  "last_name": "Cattanach",
+  "email": "tcattanach1@friendfeed.com",
+  "gender": "Female",
+  "pic": "http://dreamatico.com/data_images/people/people-2.jpg"
+}, {
+  "id": 3,
+  "first_name": "Rollo",
+  "last_name": "Sinclar",
+  "email": "rsinclar2@wikimedia.org",
+  "gender": "Male",
+  "pic": "http://lorempixel.com/output/people-q-c-640-640-3.jpg"
+}, {
+  "id": 4,
+  "first_name": "Raynor",
+  "last_name": "Wastall",
+  "email": "rwastall3@scientificamerican.com",
+  "gender": "Male",
+  "pic": "http://lorempixel.com/output/people-q-c-640-640-5.jpg"
+}, {
+  "id": 5,
+  "first_name": "Tera",
+  "last_name": "Purchall",
+  "email": "tpurchall4@toplist.cz",
+  "gender": "Female",
+  "pic": "http://lorempixel.com/output/people-q-c-640-640-4.jpg"
+}]

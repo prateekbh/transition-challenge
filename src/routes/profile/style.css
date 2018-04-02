@@ -1,142 +1,56 @@
-.profile {
-	padding: 140px 20px 20px 20px;
-	min-height: 100%;
-  width: 100%;
+.profile{
+
 }
 
-.card {
-  opacity: 0;
-  z-index: 11;
-  position: fixed;
-  top: 50px;
-  width: calc(100% - 40px);
-}
-
-.info {
-  color: #999;
+.heading{
+  height: 300px;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
 }
 
-.info .startdate {
-  flex: 3
+.name {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  color: #fff;
+  text-shadow: #666 1px 1px 5px;
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: 500ms;
 }
 
-.info .stats{
-  display: flex;
-  color: #1DE9B6;
-}
-
-.infolist {
-  margin-top: 16px;
-}
-
-.infodetails {
+.pic {
+  width: 100vw;
+  height: 100vw;
+  border-radius: 50%;
+  transform: scale(0.2);
+  background-size: cover;
+  background-position: center;
   opacity: 0;
 }
 
-.customlistitem {
-  padding: 0;
-  opacity: 0;
-  animation-name: drop;
-  animation-duration: 300ms;
-  animation-fill-mode: forwards;
+.visible .pic{
+  animation: appearInBox 500ms forwards;
 }
 
-.fablike, .fabwallet {
-  position: fixed;
-  bottom: 20px;
-  left: 10%;
-  background-color: #D32F2F;
-  opacity: 0;
+.visible .heading {
+  box-shadow: #ccc 0px 1px 5px;
 }
 
-.fabwallet {
-  background-color: #03A9F4;
-  left: auto;
-  right: 10%;
+.visible .name {
+  opacity: 1;
 }
 
-/**
- * Appear animation
- */
-.visible .card {
-  animation-name: fadein;
-  animation-duration: 50ms;
-  animation-fill-mode: forwards;
-}
-
-.visible .fablike, .visible .fabwallet{
-  animation-name: rise;
-  animation-duration: 300ms;
-  animation-fill-mode: forwards;
-  animation-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.visible .infodetails {
-  animation-name: drop;
-  animation-duration: 300ms;
-  animation-fill-mode: forwards;
-}
-
-/**
- * Disappear animation
- */
-
-.leaving .card {
-  opacity: 0;
-}
-
-.leaving .fablike, .leaving .fabwallet{
-  animation-name: drown;
-  animation-duration: 100ms;
-  animation-fill-mode: forwards;
-  animation-timing-function: linear;
-}
-
-.leaving .infodetails {
-  animation-name: rise;
-  animation-duration: 300ms;
-  animation-fill-mode: backwards;
-}
-
-@keyframes fadein {
+@keyframes appearInBox {
   from {
     opacity: 0;
+    transform: scale(0.2);
   }
   to {
     opacity: 1;
-  }
-}
-
-@keyframes drop {
-  from {
-    opacity: 0;
-    transform: translateY(-10px)
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0)
-  }
-}
-
-@keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes drown {
-  from {
-    opacity: 1;
-    transform: translateY(0px);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(50px);
+    transform: scale(1.4);
   }
 }

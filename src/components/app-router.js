@@ -36,11 +36,12 @@ export default class AppRouter {
 	 */
 	addSharedElement(element, cardBoundingRect) {
 		this.sharedElement_ = element;
-		this.sharedElementPosition_ = cardBoundingRect;
-		element.className = 'mdc-card';
-		element.removeAttribute('style');
+    this.sharedElementPosition_ = cardBoundingRect;
+    element.classList.add('shared-element');
 		element.style.top = `${cardBoundingRect.top}px`;
 		element.style.left = `${cardBoundingRect.left}px`;
+		element.style.height = `${cardBoundingRect.height}px`;
+		element.style.width = `${cardBoundingRect.width}px`;
 		element.style.transitionDuration = '500ms';
 		this.ghostContainer_.appendChild(this.sharedElement_);
 	}
@@ -49,21 +50,24 @@ export default class AppRouter {
 	 * Animates the shared element to destination coordinates
 	 * @param {*} position
 	 */
-	runAnimation({ top, left }) {
+	runAnimation({ top, left = 0 }) {
 		return new Promise((resolve, reject) => {
 			try {
-				const travelDistance = top - this.sharedElementPosition_.top;
+        const verticalTravelDistance = top - this.sharedElementPosition_.top;
+        const horizontalTravelDistance = left - this.sharedElementPosition_.left;
 				this.ghostContainer_.addEventListener('transitionend', () => {
 					resolve();
 					setTimeout(() => {
+            this.sharedElement_ && this.sharedElement_.remove();
 						this.clearGhostContainer_();
 					}, 300);
 				}, { once: true });
 				requestAnimationFrame(() => {
-					this.sharedElement_.style.transform = `translateY(${travelDistance}px)`;
+					this.sharedElement_.style.transform = `translateY(${verticalTravelDistance}px) translateX(${horizontalTravelDistance}px)`;
 				});
 			}
 			catch (e) {
+        console.error(e);
 				this.clearGhostContainer_();
 				reject();
 			}

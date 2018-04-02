@@ -61,12 +61,9 @@ body.lock {
   z-index: 14;
 }
 
-.animation-ghost .mdc-card {
+.animation-ghost .shared-element {
   position: absolute;
   z-index: 15;
-  width: calc(100% - 40px);
-  box-sizing: border-box;
-  left: 20px;
   transition-property: transform;
   transition-duration: 500ms;
   transition-timing-function: cubic-bezier(0.6, -0.28, 0.735, 0.045);
